@@ -1,0 +1,35 @@
+# define Traefik configuration
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: traefik-config
+data:
+  traefik.toml: |
+    # traefik.toml
+    checkNewVersion = false
+    IdleTimeout = "180s"
+    MaxIdleConnsPerHost = 500
+    logLevel = "INFO"
+    defaultEntryPoints = ["http", "https"]
+
+    [acme]
+    email = "dev@d-talks.org"
+    storage = "/etc/traefik/acme/acme.json"
+    entryPoint = "https"
+    OnHostRule = true
+    onDemand = true
+    acmeLogging = true
+    #caServer = "https://acme-staging.api.letsencrypt.org/directory"
+
+    [[acme.domains]]
+       main = "d-talks.org"
+
+    [entryPoints]
+      [entryPoints.http]
+      address = ":80"
+      compress = true
+        [entryPoints.http.redirect]
+        entryPoint = "https"
+      [entryPoints.https]
+      address = ":443"
+        [entryPoints.https.tls]
