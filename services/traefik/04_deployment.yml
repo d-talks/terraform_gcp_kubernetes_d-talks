@@ -26,7 +26,7 @@ spec:
           volumeMounts:
             - mountPath: "/config"
               name: "config"
-            - mountPath: "acme"
+            - mountPath: "/acme"
               name: "acme"
           ports:
             - containerPort: 80

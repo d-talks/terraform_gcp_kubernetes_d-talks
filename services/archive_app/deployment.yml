@@ -15,16 +15,9 @@ spec:
       labels:
         app: archive-app
     spec:
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: pvc-tmp
       containers:
         - name: archive-app
           image: "gcr.io/d-talks-243604/d-talks_link-archive:latest"
           imagePullPolicy: Always
-          volumeMounts:
-            - mountPath: "/data"
-              name: "data"
       imagePullSecrets:
         - name: var-registry-secret
