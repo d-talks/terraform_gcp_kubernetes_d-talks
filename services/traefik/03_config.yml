@@ -46,11 +46,14 @@ data:
 
     [acme]
     email = "dev@d-talks.org"
-    storage = "/tmp/traefik/acme/acme.json"
+    storage = "acme/acme.json"
     entryPoint = "https"
     acmeLogging = true
     # onDemand = true
-    # onHostRule = true
+    onHostRule = true
+
+    [acme.httpChallenge]
+      entryPoint = "http"
 
     # CA server to use
     # Uncomment the line to run on the staging let's encrypt server
