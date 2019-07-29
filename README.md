@@ -64,7 +64,7 @@ kubectl apply -f services/[SERVICE]
 # create a GCP service account; format of account is email address
 SA_EMAIL=$(gcloud iam service-accounts --format='value(email)' create k8s-gcr-auth-ro)
 # create the json key file and associate it with the service account
-gcloud iam service-accounts keys create k8s-gcr-auth-ro.json --iam-account=$SA_EMAIL
+gcloud iam service-accounts keys create key.json --iam-account=$SA_EMAIL
 # get the project id
 PROJECT=$(gcloud config list core/project --format='value(core.project)')
 # add the IAM policy binding for the defined project and service account
@@ -75,6 +75,6 @@ SECRETNAME=var-registry-secret
 kubectl create secret docker-registry $SECRETNAME \
   --docker-server=https://gcr.io \
   --docker-username=_json_key \
-  --docker-email=oh_cho@caredoc.kr \
-  --docker-password="$(cat k8s-gcr-auth-ro.json)"
+  --docker-email=account@email.com \
+  --docker-password="$(cat key.json)"
 ```
